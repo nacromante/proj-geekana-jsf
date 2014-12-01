@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Resultados parciais</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+		<p:messages autoUpdate="true" showDetail="false" />
+		<center>
+
+
+			<h:form style="width: 500px;" id="ResultadosParciais">
+				<br />
+				<br />
+				<h:panelGrid columns="2" border="0" style="width: 50%;">
+					<h:outputText value="Gincana" for="NomeEquipe" style="font-size: 20px;padding-bottom: 0px;"/>
+					<p:selectOneMenu id="Gincana" converter="entityConverter"
+						value="#{resultadoParcialBean.gincana}" required="true"
+						requiredMessage="Informe a gincana" style="width: 120px;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{resultadoParcialBean.getGincanas()}"
+							var="gincana" itemLabel="#{gincana.ano.toString()}"
+							itemValue="#{gincana}" />
+						<p:ajax event="change" update="Parciais,Totais" />
+
+					</p:selectOneMenu>
+				</h:panelGrid>
+				<br/>
+				<p:dataGrid value="#{resultadoParcialBean.getProvas()}" var="prova" 
+					columns="1" id="Parciais" emptyMessage="Sem provas cadastratadas para a gincana seleciona">
+					<f:facet name="header">
+            			Resultados parciais
+        			</f:facet>
+					
+					<h:panelGrid columns="1" border="0" style="width: 500px;float:left;" >
+							<p:column style="width: 500px;" >
+								<h:outputText value="#{prova.descricao}" />
+								<h:outputText value=" - " />
+								<h:outputText value="Pontuação máxima #{prova.pontuacaoMaxima}" />
+							</p:column>
+							<p:separator style="width:486px;float:left;"/>
+
+							<ui:repeat var="resultadoEp" value="#{prova.getResultadosEquipeProva()}">
+							
+								<h:outputText value="#{resultadoEp.equipe.descricao}" />
+								<h:outputText value=" - " />
+								<h:outputText value="#{resultadoEp.pontuacaoAtingida}" />
+								<br/>
+							</ui:repeat>
+					</h:panelGrid>
+				</p:dataGrid>
+				<br/>
+				<p:dataGrid value="#{resultadoParcialBean.getResultadosTotais()}" var="resultadoTotal"
+					columns="1" id="Totais" emptyMessage="Sem resultados cadastratados para a gincana seleciona">
+					<f:facet name="header">
+            			Resultados totais parciais
+        			</f:facet>
+								<h:column>							
+									<h:outputText value="#{resultadoTotal.equipe.descricao}" />
+									<h:outputText value=" - " />
+									<h:outputText value="#{resultadoTotal.pontuacaoAtingida}" />
+								</h:column>
+				</p:dataGrid>
+				
+
+			</h:form>
+
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

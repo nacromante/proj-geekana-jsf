@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Prova</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+			<p:messages autoUpdate="true" showDetail="false" />
+		<center>
+
+
+			<h:form style="width: 500px;" id="PainelAdm">
+				<br />
+				<br />
+				<p:panel style="width: 500px;height: 210px;" id="PanelCadAlu">
+
+					<f:facet name="header"> 
+						<font style="font-size: 20px"> Painel do administrador </font>
+					</f:facet>
+
+					<h:panelGrid columns="1" id="gridLider" style="width: 500px;"	border="0">
+
+						<h:outputLabel value="Voçê efetuou o login com sucesso"  />
+						<h:outputLabel value="O que deseja fazer?"  />
+						<p:separator style="width: 480px;float: left;"/>
+						<br/>
+						<p:commandLink value="Cadastrar uma gincana" action="gincana?faces-redirect=true"/>
+						<p:commandLink value="Cadastrar uma prova" action="prova?faces-redirect=true"/>						
+						<p:commandLink value="Registrar resultado de equipe em prova" action="registroPontuacaoProva?faces-redirect=true"/>
+						<p:commandLink value="sair" action="#{loginBean.logout()}"/>
+					
+					</h:panelGrid>
+
+
+				</p:panel>
+
+
+			</h:form>
+
+
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

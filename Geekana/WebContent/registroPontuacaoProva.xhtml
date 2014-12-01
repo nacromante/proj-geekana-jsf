@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>RegistroProntuacaoProva</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+			<p:messages autoUpdate="true" showDetail="false" />
+		<center>
+
+
+			<h:form style="width: 500px;" id="CadastroRegistroPontuacaoProva">
+				<br />
+				<br />
+				<p:panel style="width: 500px;height: 220px;" id="PanelCadAlu">
+
+					<f:facet name="header"> 
+						<font style="font-size: 20px"> Registro de pontuação em prova </font>
+					</f:facet>
+
+					<h:panelGrid columns="3" id="gridRegistroProntuacaoProva" style="width: 500px;"	border="0">
+
+						<h:outputText value="Gincana" for="NomeRegistroProntuacaoProva" />
+						<p:selectOneMenu id="Gincana" converter="entityConverter" 
+							value="#{registroPontuacaoProvaBean.gincana}" required="true" requiredMessage="Informe a gincana" 
+							style="width: 170px;">
+							<f:selectItem itemLabel="Selecione uma gincana" />
+							<f:selectItems value="#{registroPontuacaoProvaBean.getGincanas()}"
+								var="gincana" itemLabel="#{gincana.ano.toString()}"
+								itemValue="#{gincana}" />
+							<p:ajax event="change" update="Equipe,Prova"/>	
+
+						</p:selectOneMenu>
+						<p:message id="MessageGincanaRegistroProntuacaoProva" for="Gincana" display="icon" />
+
+						<h:outputText value="Equipe" for="NomeEquipe" />
+						<p:selectOneMenu id="Equipe" converter="entityConverter" 
+							value="#{registroPontuacaoProvaBean.resultadoEquipeProva.equipe}" required="true" requiredMessage="Informe a equipe" 
+							style="width: 170px;" disabled="#{registroPontuacaoProvaBean.gincana.id == null}">
+							<f:selectItem itemLabel="Selecione uma equipe" />
+							<f:selectItems value="#{registroPontuacaoProvaBean.getEquipes()}"
+								var="equipe" itemLabel="#{equipe.descricao}"
+								itemValue="#{equipe}" />
+						</p:selectOneMenu>
+						<p:message id="MessageEquipe" for="Equipe" display="icon" />
+						
+						<h:outputText value="Prova" for="NomeProva" />
+						<p:selectOneMenu id="Prova" converter="entityConverter"
+							value="#{registroPontuacaoProvaBean.resultadoEquipeProva.prova}" required="true" requiredMessage="Informe a prova" 
+							style="width: 170px;" disabled="#{registroPontuacaoProvaBean.gincana.id == null}">
+							<f:selectItem itemLabel="Selecione uma prova" />
+							<f:selectItems value="#{registroPontuacaoProvaBean.getProvas()}"
+								var="prova" itemLabel="#{prova.descricao}"
+								itemValue="#{prova}" />
+						</p:selectOneMenu>
+						<p:message id="MessageProva" for="Prova" display="icon" />
+						
+						<h:outputLabel value="Pontuação atingida " for="NomePadrinho" />
+						<p:inputText value="#{registroPontuacaoProvaBean.resultadoEquipeProva.pontuacaoAtingida}" id="NomePadrinho"
+							required="true" requiredMessage="Informe a pontuação atingida."
+							style="width: 200px;" maxlength="50"/>
+						<p:message id="MessagePadrinho" for="NomePadrinho" display="icon" />
+						
+						
+					
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" id="gridBotao"
+						style="width: 280px;text-align: left;float: left;" border="0">
+						<p:commandButton value="Cadastrar" action="#{registroPontuacaoProvaBean.salvar()}" update="gridRegistroProntuacaoProva"
+							image="ui-icon-disk" style="left: 10px;"/>
+					</h:panelGrid>
+
+				</p:panel>
+
+
+			</h:form>
+
+
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

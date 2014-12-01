@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Prova</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+			<p:messages autoUpdate="true" showDetail="false" />
+		<center>
+
+
+			<h:form style="width: 500px;" id="CadastroProva">
+				<br />
+				<br />
+				<p:panel style="width: 500px;height: 190px;" id="PanelCadAlu">
+
+					<f:facet name="header"> 
+						<font style="font-size: 20px"> Cadastro de prova </font>
+					</f:facet>
+
+					<h:panelGrid columns="3" id="gridProva" style="width: 500px;"	border="0">
+						
+						<h:outputText value="Gincana" for="NomeGincana" />
+						<p:selectOneMenu id="Gincana" converter="entityConverter" 
+							value="#{provaBean.prova.gincana}" required="true" requiredMessage="Informe a gincana" style="width: 170px;">
+							<f:selectItem itemLabel="Selecione uma gincana" />
+							<f:selectItems value="#{provaBean.getGincanas()}"
+								var="gincana" itemLabel="#{gincana.ano.toString()}"
+								itemValue="#{gincana}" />
+
+						</p:selectOneMenu>
+						<p:message id="MessageGincanaEquipe" for="Gincana" display="icon" />
+
+						<h:outputLabel value="Descrição da prova " for="DescricaoProva" />
+						<p:inputText value="#{provaBean.prova.descricao}" required="true"
+							requiredMessage="Informe a descrição." id="DescricaoProva" 
+							style="width: 120px;" />
+						<p:message id="MessageDescricao" for="DescricaoProva" display="icon" />
+						
+						<h:outputLabel value="Pontuação máxima " for="NomePontuacaoMaxima" />
+						<p:spinner value="#{provaBean.prova.pontuacaoMaxima}" id="PontuacaoMaxima"
+							required="true" requiredMessage="Informe o nome a pontuação máxima."
+							style="width: 200px;" maxlength="50"/>
+						<p:message id="MessagePontuacaoMaxima" for="PontuacaoMaxima" display="icon" />
+						
+					
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" id="gridBotao"
+						style="width: 280px;text-align: left;float: left;" border="0">
+						<p:commandButton value="Cadastrar" action="#{provaBean.salvar()}" update="gridProva"
+							image="ui-icon-disk" style="left: 10px;"/>
+					</h:panelGrid>
+
+				</p:panel>
+
+
+			</h:form>
+
+
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Líder</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+			<p:messages autoUpdate="true" showDetail="false" />
+		<center>
+
+
+			<h:form style="width: 500px;" id="CadastroUsuario">
+				<br />
+				<br />
+				<p:panel style="width: 500px;height: 250px;" id="PanelCadAlu">
+
+					<f:facet name="header"> 
+						<font style="font-size: 20px"> Cadastro de líder </font>
+					</f:facet>
+
+					<h:panelGrid columns="3" id="gridUsuario" style="width: 500px;"	border="0">
+
+						<h:outputText value="Nome do líder" for="NomeUsuario" />
+						<p:inputText value="#{liderBean.usuario.nome}" required="true"
+							requiredMessage="Informe o nome." id="NomeUsuario"
+							style="width: 200px;" />
+						<p:message id="MessageNomeUsuario" for="NomeUsuario" display="icon" />
+
+						<h:outputLabel value="Telefone " for="TelefoneUsuario" />
+						<p:inputMask value="#{liderBean.usuario.telefone}" required="true"
+							requiredMessage="Informe o telefone." id="TelefoneUsuario" mask="(99)9999-9999"
+							style="width: 120px;" />
+						<p:message id="MessageTelefone" for="TelefoneUsuario" display="icon" />
+						
+						<h:outputLabel value="E-mail/Login " for="Email" />
+						<p:inputText value="#{liderBean.usuario.email}" id="Email"
+							required="true" requiredMessage="Informe o e-mail."
+							style="width: 200px;" maxlength="50"
+							validatorMessage="e-mail invalido!"
+							onkeyup="this.value=this.value.toLowerCase()" />
+						<p:message id="MessageEmail" for="Email" display="icon" />
+						
+						<h:outputText value="Senha " for="SenhaUsuario" />
+						<p:password level="2" weakLabel="Ruim" goodLabel="Boa"
+							promptLabel="Por favor entre com a senha!" 
+							value="#{liderBean.usuario.senha}" required="true"
+							requiredMessage="Informe a senha." feedback="true"
+							id="SenhaUsuario" style="width: 60px;" maxlength="8" >
+						</p:password>
+						<p:message id="MessageSenha" for="SenhaUsuario" display="icon" />
+						
+						<h:outputText value="Repita sua senha " for="SenhaRepetidaUsuario" />
+						<p:password level="2" weakLabel="Ruim" goodLabel="Boa"
+							promptLabel="Por favor entre com a senha novamente!" 
+							value="#{liderBean.senhaRepetida}" required="true" 
+							requiredMessage="Informe a senha novamente." feedback="false"
+							id="SenhaReptidaUsuario" style="width: 60px;" maxlength="8">
+						</p:password>
+						<p:message id="MessageSenhaRepetida" for="SenhaReptidaUsuario" display="icon" />
+					
+
+					
+					</h:panelGrid>
+					<h:panelGrid columns="2" id="gridBotao"
+						style="width: 280px;text-align: left;float: left;" border="0">
+						<p:commandButton value="Cadastrar" action="#{liderBean.salvar()}"
+							image="ui-icon-disk" style="left: 10px;"/>
+						
+						
+					</h:panelGrid>
+
+				</p:panel>
+
+
+			</h:form>
+
+
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<link href="resources/imagens/ifmaIco.jpg" rel="shortcut icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Geekana</title>	<h:outputScript name="locale-primefaces.js" library="js" />
+	<h:outputStylesheet name="styleGeekana.css" library="css" />
+</h:head>
+<h:body >
+	<div id="cabecalho" style="height: 160px;">		
+	    <h:graphicImage id="ImageLogo" library="imagens" name="logoGeekana.png"     				 styleClass="logo" height="134" width="300" cache="false" />			<div id="logoff" >			<h:form>				<p:menubar id="MenuLider" style="width: 100%;height: 18px;"					rendered="#{loginBean.mostraMenuLider()}">					<p:menuitem>						<h:outputText value="L&iacute;der: #{loginBean.usuario.nome}"							styleClass="labelMenuItem" />					</p:menuitem>					<p:menuitem value="Home" action="painelLider?faces-redirect=true"						styleClass="tituloMenuItem" ajax="false">					</p:menuitem>										<p:submenu label="Op&ccedil;&otilde;es de l&iacute;der"						action="opcoesLider?faces-redirect=true" styleClass="tituloMenuItem"						ajax="false" >						<p:menuitem value="Cadastrar uma equipe"							action="equipe?faces-redirect=true"							styleClass="tituloMenuItem" ajax="false" />													<p:menuitem value="Cadastrar uma membro"							action="membroEquipe?faces-redirect=true"							styleClass="tituloMenuItem" ajax="false" />						</p:submenu>						<p:menuitem value="ResultadosParciais"						action="resultadosParciais?faces-redirect=true"						styleClass="tituloMenuItem" ajax="false" />											<p:menuitem value="Sair"						action="#{loginBean.logout()}"						styleClass="tituloMenuItem" ajax="false" />					</p:menubar>								<p:menubar id="MenuAdm" style="width: 100%;height: 18px;"					rendered="#{loginBean.mostraMenuAdm()}">					<p:menuitem>						<h:outputText value="Administrador: #{loginBean.usuario.nome}"							styleClass="labelMenuItem" />					</p:menuitem>					<p:menuitem value="Home" action="painelAdministrador?faces-redirect=true"						styleClass="tituloMenuItem" ajax="false" update="ImageLogo">					</p:menuitem>					<p:menuitem value="Cadastro de l&iacute;der"						action="lider?faces-redirect=true" styleClass="tituloMenuItem"						ajax="false" />					<p:submenu label="Op&ccedil;&otilde;es de administrador"						action="opcoesAdm?faces-redirect=true" styleClass="tituloMenuItem"						ajax="false" >						<p:menuitem value="Cadastrar uma gincana"							action="gincana?faces-redirect=true"							styleClass="tituloMenuItem" ajax="false" />						<p:menuitem value="Cadastrar Prova"							action="prova?faces-redirect=true" styleClass="tituloMenuItem"							ajax="false" />						<p:menuitem value="Registrar resultado de equipe em prova"							action="registroPontuacaoProva?faces-redirect=true"							styleClass="subMenuItemLargo" ajax="false" />						</p:submenu>						<p:menuitem value="Resultados Parciais"						action="resultadosParciais?faces-redirect=true"						styleClass="tituloMenuItem" ajax="false" />											<p:menuitem value="Sair"						action="#{loginBean.logout()}"						styleClass="tituloMenuItem" ajax="false" />												</p:menubar>								<p:menubar id="MenuGeral" style="width: 100%;height: 18px;"					rendered="#{!loginBean.mostraMenuLider() and !loginBean.mostraMenuAdm()}">					<p:menuitem value="Home" url="http://dai.ifma.edu.br/jinf13/?page_id=50"						styleClass="tituloMenuItem" ajax="false">					</p:menuitem>										<p:menuitem value="Cadastro de l&iacute;der"						action="lider?faces-redirect=true" styleClass="tituloMenuItem"						ajax="false" />										<p:menuitem value="Login"						action="login?faces-redirect=true" styleClass="tituloMenuItem"						ajax="false" />											<p:menuitem value="ResultadosParciais"						action="resultadosParciais?faces-redirect=true"						styleClass="tituloMenuItem" ajax="false" />																</p:menubar>											</h:form>		</div>	</div>	
+	<br />
+
+	<div id="conteudo">				<!-- <p:messages id="messages" autoUpdate="true"/> -->
+		<ui:insert name="corpo" />
+	</div>
+</h:body>
+
+</html>

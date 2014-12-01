@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title><ui:define name="title">Login</ui:define>
+	</title>
+
+</h:head>
+
+<ui:composition template="template.xhtml">
+	<ui:define name="corpo">
+
+		<p:ajaxStatus onstart="statusDialog.show();"
+			onsuccess="statusDialog.hide();" />
+
+		<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+			draggable="false" closable="false">
+			<p:graphicImage value="resources/imagens/ajax.gif" />
+		</p:dialog>
+
+
+		<div id="formLogin">
+			<br/><br/>
+			<h:form>
+
+				<p:messages id="messages" autoUpdate="true" />
+
+				<p:panel header="Login" style="margin-bottom:10px;" id="panel">
+					
+					<h:panelGrid columns="3" id="grid">
+
+						<h:outputLabel value="E-mail/Login:" for="Login" />
+						<p:inputText value="#{loginBean.usuario.email}"
+							required="true" requiredMessage="Campo Login em Branco!"
+							id="Login" />
+						<p:message id="LoginMessage" for="Login" display="icon" />
+
+						<h:outputLabel value="Senha:" for="Senha" />
+						<p:password value="#{loginBean.usuario.senha}"
+							readonly="false" required="true"
+							requiredMessage="Campo Senha em Branco!" id="Senha"
+							feedback="false" />
+						<p:message id="SenhaMessage" for="Senha" display="icon" />
+
+						<h:outputLabel value="Tipo: " />
+						<p:selectOneMenu id="Usuario" converter="entityConverter"
+							value="#{loginBean.usuario.tipoUsuario}" required="true" style="width: 120px;">
+
+							
+							<f:selectItems value="#{loginBean.getTiposUsuario()}"
+								var="tipoUsuario" itemLabel="#{tipoUsuario.descricao}"
+								itemValue="#{tipoUsuario}" />
+
+						</p:selectOneMenu>
+						<br/>
+                        <br/>
+                        <br/>
+
+						<p:ajaxStatus onstart="status.show();" onsuccess="status.hide();" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Enviar" update="grid"
+								action="#{loginBean.efetuarLogin()}" image="ui-icon-check"
+								style="margin:0" />
+								<br/>
+								<br/>
+							<font face="arial"> 
+							</font>
+
+						</f:facet>
+
+					</h:panelGrid>
+
+				</p:panel>
+
+			</h:form>
+
+		</div>
+
+	</ui:define>
+</ui:composition>
+
+</html>
